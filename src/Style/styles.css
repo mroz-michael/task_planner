@@ -5,11 +5,18 @@
 :root {
     --bg-color:  #e6e9ea;
     --text-color: black;
-    height: 100vh;
+    --button-gradient: linear-gradient(
+        180deg,
+        rgba(172, 85, 207, 1),
+        rgba(98, 199, 210, 1)
+    );
+    min-height: 100vh;
+    background-color: var(--bg-color);
 }
 
-input {
+input, input:hover, input:focus {
     border: none;
+    outline: none;
 }
 
 .dark_mode {
@@ -51,11 +58,6 @@ input {
     border: none;
 }
 
-#darkmode_toggle:hover {
-    border-color: yellow;
-}
-
-
 main {
     margin: 0;
     background-color: var(--bg-color);
@@ -68,11 +70,36 @@ main {
 
 #task_container {
     width: 500px;
-    margin-top: -20%;
+    
 }
 
 #create_task {
     border: none;
+    display: flex;
+    background: white;
+    border-radius: 7px;
+    align-items: center;
+}
+
+#create_task > :last-child {
+    width: 90%;
+    border: none;
+    margin-right: 10px;
+}
+
+#create_task_button {
+    border-radius: 50%;
+    padding: 10px 15px;
+    margin-left: 20px;
+    border: rgb(255, 255, 255);
+    font-size: large;
+    height: 50%;
+}
+
+#create_task_button:hover {
+    
+    background: var(--button-gradient);
+    color: white;
 }
 
 #tasks {
@@ -101,10 +128,6 @@ main {
     border-bottom: 1px solid rgb(214, 213, 213);
 }
 
-#create_task > :first-child {
-    width: 100%;
-    border-radius: 7px;
-}
 
 #tasks_footer {
     width: inherit;
@@ -121,4 +144,16 @@ main {
 #tasks_footer p, #bottom_text {
     font-size: small;
     color: gray;
+}
+
+#bottom_text {
+    text-align: center;
+}
+
+/* desktop only stuff*/
+@media (min-width: 600px) {
+    #task_container {
+        position: absolute;
+        top: 150px;
+    }
 }
