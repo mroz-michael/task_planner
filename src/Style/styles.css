@@ -5,6 +5,7 @@
 :root {
     --bg-color:  #e6e9ea;
     --text-color: black;
+    height: 100vh;
 }
 
 input {
@@ -20,13 +21,15 @@ input {
 #header {
     border: none;
     padding: 0%;
-    background-image: url("../../design/bg-desktop-dark.jpg");
+    background-image: url("../../design/bg-desktop-light.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 33vh;
 }
 
 #header_container {
     margin-left: 30%;
-    padding-top: 5%;
+    padding-top: 3%;
     width: 40%;
     font-size: larger;
     display: flex;
@@ -45,8 +48,7 @@ input {
     background: none;
     width: 50px;
     height: 50px;
-    border: 2px solid white;
-    border-radius: 20px;
+    border: none;
 }
 
 #darkmode_toggle:hover {
@@ -66,6 +68,7 @@ main {
 
 #task_container {
     width: 500px;
+    margin-top: -20%;
 }
 
 #create_task {
@@ -86,16 +89,21 @@ main {
     margin-bottom: 0;
 }
 
+#task_list > :first-child {
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+}
+
 .task {
     background-color: white;
     height: 2%;
     padding: 20px;
-    border-radius: 5px;
     border-bottom: 1px solid rgb(214, 213, 213);
 }
 
 #create_task > :first-child {
     width: 100%;
+    border-radius: 7px;
 }
 
 #tasks_footer {
@@ -105,11 +113,12 @@ main {
     justify-content: space-around;
     background-color: white;
     margin-top: 0px;
-    border-radius: 5px;
-    box-shadow: -5px 30px 50px -15px black;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    box-shadow: -25px 20px 50px -15px black;
 }
 
-#tasks_footer p {
+#tasks_footer p, #bottom_text {
     font-size: small;
+    color: gray;
 }
-
