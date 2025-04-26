@@ -1,0 +1,65 @@
+:root {
+    --bg-color:  #f4f4f4;
+    --text-color: black;
+}
+
+.dark_mode {
+    --bg-color: black;
+    --text-color: white;
+    
+}
+
+#header {
+    border: none;
+    padding: 0%;
+    background-image: url("../Assets/bg-desktop-dark.jpg");
+    height: 33vh;
+}
+
+#header_container {
+    margin-left: 30%;
+    padding-top: 5%;
+    width: 40%;
+    font-size: larger;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#header_container > h2 {
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#darkmode_toggle{
+    background: none;
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 20px;
+}
+
+#darkmode_toggle:hover {
+    border-color: yellow;
+}
+
+
+main {
+    margin: 0;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 67vh;
+}
+
+.task {
+    background-color: var(--bg-color);
+    height: 2%;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid black;
+}
