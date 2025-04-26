@@ -1,6 +1,14 @@
+* {
+    box-sizing: border-box;
+}
+
 :root {
-    --bg-color:  #f4f4f4;
+    --bg-color:  #e6e9ea;
     --text-color: black;
+}
+
+input {
+    border: none;
 }
 
 .dark_mode {
@@ -12,7 +20,7 @@
 #header {
     border: none;
     padding: 0%;
-    background-image: url("../Assets/bg-desktop-dark.jpg");
+    background-image: url("../../design/bg-desktop-dark.jpg");
     height: 33vh;
 }
 
@@ -56,10 +64,52 @@ main {
     height: 67vh;
 }
 
+#task_container {
+    width: 500px;
+}
+
+#create_task {
+    border: none;
+}
+
+#tasks {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#task_list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0%;
+    margin-bottom: 0;
+}
+
 .task {
-    background-color: var(--bg-color);
+    background-color: white;
     height: 2%;
     padding: 20px;
     border-radius: 5px;
-    border: 2px solid black;
+    border-bottom: 1px solid rgb(214, 213, 213);
 }
+
+#create_task > :first-child {
+    width: 100%;
+}
+
+#tasks_footer {
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: white;
+    margin-top: 0px;
+    border-radius: 5px;
+    box-shadow: -5px 30px 50px -15px black;
+}
+
+#tasks_footer p {
+    font-size: small;
+}
+
