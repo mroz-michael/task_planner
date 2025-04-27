@@ -5,6 +5,9 @@
 :root {
     --bg-color:  #e6e9ea;
     --text-color: black;
+    --header-bg: url("../../design/bg-desktop-light.jpg");
+    --darkmode-icon: url("../Assets/icon-moon.svg");
+    --task-bg: white;
     --button-gradient: linear-gradient(
         180deg,
         rgba(172, 85, 207, 1),
@@ -20,15 +23,17 @@ input, input:hover, input:focus {
 }
 
 .dark_mode {
-    --bg-color: black;
+    --bg-color: rgb(39, 35, 35);
     --text-color: white;
-    
+    --header-bg: url("../../design/bg-desktop-dark.jpg");
+    --task-bg: rgb(23, 22, 25);
+    --darkmode-icon: url("../Assets/icon-sun.svg");
 }
 
 #header {
     border: none;
     padding: 0%;
-    background-image: url("../../design/bg-desktop-light.jpg");
+    background-image: var(--header-bg);
     background-size: cover;
     background-repeat: no-repeat;
     height: 33vh;
@@ -52,7 +57,9 @@ input, input:hover, input:focus {
 }
 
 #darkmode_toggle{
-    background: none;
+    background: var(--darkmode-icon);
+    background-repeat: no-repeat;
+    background-position: center;
     width: 50px;
     height: 50px;
     border: none;
@@ -80,10 +87,15 @@ main {
 #create_task {
     border: none;
     display: flex;
-    background: white;
+    background: var(--bg-color);
     border-radius: 7px;
     align-items: center;
     height: 90px;
+}
+
+#task_input {
+    background-color: var(--task-bg);
+    color: var(--text-color);
 }
 
 #create_task > :last-child {
@@ -96,14 +108,22 @@ main {
     padding: 6px 15px;
     border: 1px solid rgba(128, 128, 128, 0.381);
     background-color: #f7fdff;
-    font-size: large;
-    width: 40.52px;
-    height: 45px;
+    width: 30px;
+    height: 30px;
+}
+
+#create_task_button {
+    background-image: url("../Assets/icon-plus.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 25%;
 }
 
 #create_task_button:hover {
-    background: var(--button-gradient);
-    color: white;
+    background: url("../Assets/icon-plus.svg"), var(--button-gradient);
+    background-repeat: no-repeat, no-repeat;
+    background-position: center;
+    background-size: 25%, cover;
 }
 
 #tasks {
@@ -126,7 +146,7 @@ main {
 }
 
 .task {
-    background-color: white;
+    background-color: var(--task-bg);
     height: 90px;
     padding: 20px;
     border-bottom: 1px solid rgb(214, 213, 213);
@@ -141,7 +161,7 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    background-color: white;
+    background-color: var(--bg-color);
     margin-top: 0px;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
@@ -159,6 +179,7 @@ main {
 
 .task_content, .completed_task_content {
     font-family: Arial, Helvetica, sans-serif;
+    color: var(--text-color);
 }
 
 .completed_task_content {

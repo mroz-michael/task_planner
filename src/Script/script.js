@@ -3,9 +3,9 @@
     Front end Requirements:
     1) create task  //done for now, come back when backend is added
     2) update task  //done for now, come back when backend is added
-    3) delete tasks 
-    4) toggle darkmode
-    5) toggle view between all, active, or completed tasks
+    3) delete tasks //done for now, come back when backend is added
+    4) toggle darkmode //done, might update and improve colours later
+    5) toggle view between all, active, or completed tasks  <-- current step
     6) add comment headers
 */
 const taskInput = document.getElementById("task_input");
@@ -13,6 +13,8 @@ const taskInput = document.getElementById("task_input");
 const taskList = document.getElementById("task_list");
 const taskButton = document.getElementById("create_task_button");
 const numTasksLeft = document.getElementById("tasks_left");
+const darkModeButton = document.getElementById("darkmode_toggle");
+
 let tasks = [];
 
 const createTask = () => {
@@ -52,7 +54,7 @@ const createTaskChildren = (taskNode, taskObj) => {
     taskContent.textContent = taskObj.content;
 
     completeTaskButton.className = "incomplete_task_button";
-    completeTaskButton.addEventListener("click", () => completeTask(taskContent, completeTaskButton, taskObj));
+    completeTaskButton.addEventListener("click", () => toggleTask(taskContent, completeTaskButton, taskObj));
 
     deleteTaskButton.className = "delete_button";
     deleteTaskButton.addEventListener("click", () => deleteTask(taskNode, taskObj));
@@ -62,11 +64,17 @@ const createTaskChildren = (taskNode, taskObj) => {
     taskNode.appendChild(deleteTaskButton);
 }
 
-const completeTask = (taskContent, taskButton, taskObj) => {
-    taskObj.completed = true;
+const toggleTask = (taskContent, taskButton, taskObj) => {
+    taskObj.completed = !taskObj.completed;
     //todo: call updateTask in php backend
-    taskContent.className = "completed_task_content";
-    taskButton.className = "completed_task_button";
+    if (taskObj.completed) {
+        taskContent.className = "completed_task_content";
+        taskButton.className = "completed_task_button";
+    } else {
+        taskContent.className = "task_content";
+        taskButton.className = "incomplete_task_button";
+    }
+
     updateNumTasks();
 }
 
@@ -93,5 +101,8 @@ const recreateTaskNodes = () => {
 }
 
 const toggleDarkMode = () => {
-    
+    const body = document.body;
+    body.className = body.className == "dark_mode" ? "" : "dark_mode";
 }
+
+darkModeButton.addEventListener("click", toggleDarkMode);
