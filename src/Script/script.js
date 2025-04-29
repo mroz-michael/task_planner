@@ -5,7 +5,7 @@
     2) update task  //done for now, come back when backend is added
     3) delete tasks //done for now, come back when backend is added
     4) toggle darkmode //done, might update and improve colours later
-    5) toggle view between all, active, or completed tasks  <-- current step
+    5) toggle view between all, active, or completed tasks //done for now, come back when backend done
     6) add comment headers
 */
 const taskInput = document.getElementById("task_input");
@@ -19,13 +19,17 @@ const toggleButtons = document.getElementsByClassName("display_toggle_button");
 let allTasks = [];
 let displayedTasks = [];
 
+/**
+ * creates a new taskObj and calls functions to add it to DOM w. the necessary elements
+ * todo: once backend is up, integrate it w backend
+ */
 const createTask = () => {
     const taskContent = taskInput.value;
-    if (taskContent.length < 1 || taskContent.length > 500) {
+    if (taskContent.length < 1 || taskContent.length > 50) {
         return;
     }
+
     const task = {content: taskContent, completed: false}
-    //todo: create php backend method that actually creates a task resource based on the object
     allTasks.push(task);
     appendTask(task);
     updateNumTasks();
@@ -34,6 +38,10 @@ const createTask = () => {
 
 taskButton.addEventListener("click", createTask);
 
+/**
+ * adds the given task object to the array of displayed tasks, and creates it as a DOM element 
+ * @param {*} task a JS object containing task content and completed status
+ */
 const appendTask = (task) => {
     displayedTasks.push(task);
     const newTask = document.createElement("li");
@@ -42,12 +50,21 @@ const appendTask = (task) => {
     taskList.appendChild(newTask);
 }
 
+/**
+ * calculates and displays the number of incomplete tasks
+ * should be called whenever a task is added/updated/removed from the DOM
+ */
 const updateNumTasks = () => {
     let numTasks = displayedTasks.filter(task =>!task.completed).length;
     let pluralize = numTasks == 1 ? "task" : "tasks";
     numTasksLeft.textContent = `${numTasks} ${pluralize} remaining`
 }
 
+/**
+ * Helper function to create and append children nodes to task nodes
+ * @param {*} taskNode the DOM node for the task object
+ * @param {*} taskObj the task object
+ */
 const createTaskChildren = (taskNode, taskObj) => {
     const taskContent = document.createElement("p");
     const completeTaskButton = document.createElement("button");
@@ -67,6 +84,12 @@ const createTaskChildren = (taskNode, taskObj) => {
     taskNode.appendChild(deleteTaskButton);
 }
 
+/**
+ * Changes the given task's status from completed to incompleted, and vice versa. 
+ * @param {*} taskContent 
+ * @param {*} taskButton 
+ * @param {*} taskObj 
+ */
 const toggleTask = (taskContent, taskButton, taskObj) => {
     taskObj.completed = !taskObj.completed;
     //todo: call updateTask in php backend
