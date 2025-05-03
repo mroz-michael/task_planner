@@ -25,6 +25,7 @@ let displayedTasks = [];
  */
 const createTask = () => {
     const taskContent = taskInput.value;
+    taskInput.value = "";
     if (taskContent.length < 1 || taskContent.length > 50) {
         return;
     }
@@ -33,7 +34,6 @@ const createTask = () => {
     allTasks.push(task);
     appendTask(task);
     updateNumTasks();
-    taskInput.value = "";
 }
 
 taskButton.addEventListener("click", createTask);
