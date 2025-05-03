@@ -1,0 +1,4 @@
+@url = localhost/task_planner/src/php/api
+
+GET {{url}}/tasks.php
+Content-Type: application/json
