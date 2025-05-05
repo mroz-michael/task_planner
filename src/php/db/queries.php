@@ -15,3 +15,7 @@ function postTaskQuery():string {
 function putTaskQuery():string {
     return "update tasks set completed = NOT completed where id = :id";
 }
+
+function deleteTaskQuery(): string {
+    return "delete from tasks where id = :id";
+}

@@ -8,7 +8,7 @@ POST {{url}}/tasks.php
 Content-Type: application/json
 
 {
-  "content": "Testing PUT route"
+  "content": "Testing DELETE route"
 }
 ###
 
@@ -17,4 +17,13 @@ Content-Type: application/json
 
 {
   "id": 3
+}
+
+###
+
+DELETE {{url}}/tasks.php
+Content-Type: application/json
+
+{
+    "id": 4
 }

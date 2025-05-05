@@ -142,5 +142,17 @@ function handlePut(PDO $pdo, array $req) {
 }
 
 function handleDelete(PDO $pdo, array $req) {
+    if (!isset($req['id'])) {
+        respond(["error" => "Missing or invalid ID in query parameters."], 400);
+    }
+
+    try {
+        $stmt = $pdo->prepare(deleteTaskQuery());
+        $stmt->bindParam(':id', $req['id'], PDO::PARAM_INT);
+        $stmt->execute();
+        respond(["message" => "delete successful"], 204);
+    } catch (PDOException $e) {
+        respond(['error' => $e->getMessage()], 500);
+    }
     
 }
