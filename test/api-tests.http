@@ -2,3 +2,10 @@
 
 GET {{url}}/tasks.php
 Content-Type: application/json
+###
+POST {{url}}/tasks.php
+Content-Type: application/json
+
+{
+  "content": "Testing POST route"
+}
