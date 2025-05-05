@@ -3,9 +3,18 @@
 GET {{url}}/tasks.php
 Content-Type: application/json
 ###
+
 POST {{url}}/tasks.php
 Content-Type: application/json
 
 {
-  "content": "Testing POST route"
+  "content": "Testing PUT route"
+}
+###
+
+PUT {{url}}/tasks.php
+Content-Type: application/json
+
+{
+  "id": 3
 }

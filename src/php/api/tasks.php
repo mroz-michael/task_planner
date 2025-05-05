@@ -28,7 +28,7 @@ switch ($method) {
         handleDelete($pdo, $req);
         break;
     default:
-        echo json_encode(['message' => 'Invalid request method']);
+        respond(['error' => 'Invalid request method'], 400);
         break;
 }
 
@@ -82,6 +82,11 @@ function sanitizeContent($content): string {
     return htmlspecialchars($content, ENT_QUOTES, "UTF-8");
 }
  
+/**
+ * processes POST requests to create new tasks
+ * @param PDO $pdo
+ * @param array $req an associative array containing the task content
+ */
 function handlePost(PDO $pdo, array $req) {
 
     if (!validateContent($req))  {
@@ -92,15 +97,48 @@ function handlePost(PDO $pdo, array $req) {
         $stmt = $pdo->prepare(postTaskQuery());
         $req['content'] = sanitizeContent($req['content']);
         $stmt->execute($req);
-        $res = ['id' => $pdo->lastInsertId(), 'content' => $req['content']];
-        respond($res, 201);
+        $resId = $pdo->lastInsertId();
+        $newTask = getTaskById($pdo, $resId);
+        respond($newTask, 201);
     } catch (PDOException $e) {
         respond(['error' => $e->getMessage()], 500);
     }
 }
 
+/**
+ * helper function to get a single task, used in POST and PUT routes
+ */
+function getTaskById(PDO $pdo, $id) {
+    try {
+        $stmt = $pdo->prepare(getTaskByIdQuery());
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        respond(['error' => $e->getMessage()], 500);
+    }
+}
+
+/**
+ * processes PUT requests to update completion status of a task
+ * @param PDO $pdo
+ * @param array $req an associative array containing the task id and content
+ */
 function handlePut(PDO $pdo, array $req) {
-    
+
+    if (!isset($req['id'])) {
+        respond(["error" => "Missing or invalid ID in query parameters."], 400);
+    }
+
+    try {
+        $stmt = $pdo->prepare(putTaskQuery());
+        $stmt->bindParam(':id', $req['id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $updatedTask = getTaskById($pdo, $req['id']);
+        respond($updatedTask, 200);
+    } catch (PDOException $e) {
+        respond(['error' => $e->getMessage()], 500);
+    }
 }
 
 function handleDelete(PDO $pdo, array $req) {
